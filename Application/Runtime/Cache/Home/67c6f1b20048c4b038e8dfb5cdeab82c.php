@@ -4,11 +4,7 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<link rel="stylesheet" href="//g.alicdn.com/sui/sui3/0.0.18/css/sui.min.css">
-		<style type="text/css">
-			.datepicker{position: absolute!important;background-color: #fff!important;}
-			form{width: 500px;}
-			
-		</style>
+		<link rel="stylesheet" href="/demo/Public/static/css/main.css" />
 	</head>
 	<body>
 		<ol class="breadcrumb">
@@ -16,7 +12,7 @@
 		  <li><a href="#">订单</a></li>
 		  <li class="active">添加订单</li>
 		</ol>
-		<form class="form-horizontal">
+		<form class="form-horizontal form">
 		  <div class="form-group">
 		    <label for="inputEmail3" class="col-sm-2 control-label">邮箱</label>
 		    <div class="col-sm-10">

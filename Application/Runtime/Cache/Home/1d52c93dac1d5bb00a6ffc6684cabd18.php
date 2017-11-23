@@ -5,10 +5,7 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<link rel="stylesheet" href="//g.alicdn.com/sui/sui3/0.0.18/css/sui.min.css">
-		<!--<link href="http://g.alicdn.com/sj/sui-editor/0.0.2/editor/css/sui-editor.css" rel="stylesheet">-->
-		<style type="text/css">
-			form{width: 500px;margin: 0 auto;}
-		</style>
+		<link rel="stylesheet" href="/demo/Public/static/css/main.css" />
 	</head>
 
 	<body>
@@ -18,7 +15,7 @@
 		  <li class="active">添加商品</li>
 		</ol>
 		
-		<form data-toggle='validate' id="form" method="post" enctype="multipart/form-data">
+		<form class="form" data-toggle='validate' id="form" method="post" enctype="multipart/form-data">
 		  	<div class="form-group">
 			    <label for="code" class="control-label">商品编号</label>
 			    <input type="text" class="form-control" id="code" name="code" placeholder="商品编号">

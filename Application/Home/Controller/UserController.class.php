@@ -2,6 +2,11 @@
 namespace Home\Controller;
 
 use Think\Controller;
+/**
+ * 用户信息等
+ * @author Administrator
+ *
+ */
 class UserController extends Controller{
     /**
      * 用户资料

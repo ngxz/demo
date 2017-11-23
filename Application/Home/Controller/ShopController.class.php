@@ -1,8 +1,15 @@
 <?php
 namespace Home\Controller;
-
-use Think\Controller;
-class ShopController extends Controller{
+use Home\Controller\PublicController;
+/**
+ * 商品列表，增改等
+ * @author Administrator
+ *
+ */
+class ShopController extends PublicController{
+    public function _ininialize(){
+        parent::_ininialize();
+    }
     /**
      * 商品列表
      */

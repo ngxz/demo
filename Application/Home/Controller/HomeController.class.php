@@ -3,12 +3,16 @@ namespace Home\Controller;
 
 use Think\Controller;
 class HomeController extends Controller{
+//     public function _initialize(){
+//         islogin();
+//     }
+    
     /**
      * 首页
      */
-    public function index(){
-        $this->display();
-    }
+//     public function index(){
+//         $this->display();
+//     }
     /**
      * 活动列表
      */

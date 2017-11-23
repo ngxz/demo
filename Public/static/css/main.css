@@ -1,0 +1,20 @@
+/*登录页表单*/
+.loginform{width: 500px;margin: 100px auto;text-align: center;padding:50px 20px;}
+.loginform label{font-size: 15px;margin-right: 5px;}
+.loginform .code{width: 24%;height: 30px;}
+.loginform .account{width: 50%;height: 30px;}
+.loginform .pwd{width: 50%;height: 30px;}
+/*表单修饰*/
+body{}
+form{width: 500px;margin: 0 auto;}
+/*表格宽度*/
+.table{margin: 0 15px;width: 98%;}
+
+/*分页修饰*/
+.pages{text-align: center;margin: 10px 0;}
+.pages a,.pages span {display:inline-block;padding:1px 4px;margin:0 1px;border:1px solid #f0f0f0;}
+.pages a,.pages li {display:inline-block;text-decoration:none;color:#58A0D3;padding: 4px 9px;border:1px solid #f0f0f0;}
+.pages a.first,.pages a.prev,.pages a.next,.pages a.end{padding: 4px 9px;margin:0;}
+.pages a:hover{border-color:#50A8E6;}
+.pages a.num{padding: 4px 9px;}
+.pages span.current{padding: 4px 9px;background:#50A8E6;color:#FFF;font-weight:700;border-color:#50A8E6;}

@@ -49,5 +49,11 @@ function getpage($count, $pagesize = 8) {
     $p->lastSuffix = false;//最后一页不显示为总页数
     return $p;
 }
+//是否有session
+function islogin(){
+    if(!$_SESSION['account']){
+        redirect(U('Home/index/login'));
+    }
+}
 
 ?>

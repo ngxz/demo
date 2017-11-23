@@ -2,7 +2,64 @@
 namespace Home\Controller;
 use Think\Controller;
 class IndexController extends Controller {
+    public function _initialize(){
+        $this->account_service = D('Account','Service');
+    }
+    /**
+     * 默认
+     */
     public function index(){
-        $this->show('<style type="text/css">*{ padding: 0; margin: 0; } div{ padding: 4px 48px;} body{ background: #fff; font-family: "微软雅黑"; color: #333;font-size:24px} h1{ font-size: 100px; font-weight: normal; margin-bottom: 12px; } p{ line-height: 1.8em; font-size: 36px } a,a:hover{color:blue;}</style><div style="padding: 24px 48px;"> <h1>:)</h1><p>欢迎使用 <b>ThinkPHP</b>！</p><br/>版本 V{$Think.version}</div><script type="text/javascript" src="http://ad.topthink.com/Public/static/client.js"></script><thinkad id="ad_55e75dfae343f5a1"></thinkad><script type="text/javascript" src="http://tajs.qq.com/stats?sId=9347272" charset="UTF-8"></script>','utf-8');
+        //已登录则跳转到首页
+        if(!empty($_SESSION['account'])){
+            $this->redirect('/index/home');
+        }else{
+            $this->display('login');
+        }
+    }
+
+    /**
+     * 登录页
+     */
+    public function login(){
+        if (IS_POST){
+            $result =  $this->account_service->validAccount(I('post.'));
+            if(!$result){
+                $result['code'] = false;
+                $result['message'] = $this->account_service->error;
+                $this->ajaxReturn($result);
+            }
+            $result['code'] = ture;
+            $result['message'] = '操作成功';
+            $this->ajaxReturn($result);
+        }else{
+            $this->display();
+        }
+    }
+    /**
+     * 生成验证码
+     */
+    public function code(){
+        $config =    array(
+            'fontSize'    =>    16,    // 验证码字体大小
+            'length'      =>    4,     // 验证码位数
+            'useNoise'    =>    false, // 关闭验证码杂点
+        );
+        $Verify = new \Think\Verify($config);
+        $Verify->entry();
+    }
+    /**
+     * 首页
+     */
+    public function home(){
+        if(!empty($_SESSION['account'])){
+            $this->redirect('/index/home');
+        }else{
+            $this->display('login');
+        }
+    }
+    // 检测输入的验证码是否正确，$code为用户输入的验证码字符串
+    public function check_verify($code){
+        $verify = new \Think\Verify();
+        return $verify->check($code);
     }
 }

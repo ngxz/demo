@@ -4,6 +4,7 @@
 		<meta charset="UTF-8">
 		<title>商品列表</title>
 		<link rel="stylesheet" href="//g.alicdn.com/sui/sui3/0.0.18/css/sui.min.css">
+		<link rel="stylesheet" href="/demo/Public/static/css/main.css" />
 		<style type="text/css">
 			.table{margin: 0 15px;width: 98%;}
 			/*分页修饰*/
