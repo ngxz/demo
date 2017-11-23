@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -36,7 +36,7 @@
 			}
   			//打开新页面
   			function openpage(url){
-				$("#iframe").attr("src","__ROOT__/"+url);
+				$("#iframe").attr("src","/demo/"+url);
 			}
   			
   		</script>
@@ -74,7 +74,7 @@
 			</ul>
 		  </div>
 		  <div class="content" style="margin-left: 0;">
-		  	<iframe src="__ROOT__/Home/tongji" id="iframe" onload="changeFrameHeight()"></iframe>
+		  	<iframe src="/demo/Home/tongji" id="iframe" onload="changeFrameHeight()"></iframe>
 		  </div>
 		</div>
 		

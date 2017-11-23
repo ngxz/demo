@@ -9,12 +9,12 @@ class IndexController extends Controller {
      * 默认
      */
     public function index(){
-        //已登录则跳转到首页
-        if(!empty($_SESSION['account'])){
-            $this->redirect('/index/home');
-        }else{
+        if (!empty($_SESSION['account'])){
+            $this->display('index');
+        }else {
             $this->display('login');
         }
+        
     }
 
     /**
@@ -24,13 +24,14 @@ class IndexController extends Controller {
         if (IS_POST){
             $result =  $this->account_service->validAccount(I('post.'));
             if(!$result){
-                $result['code'] = false;
-                $result['message'] = $this->account_service->error;
-                $this->ajaxReturn($result);
+                $error['code'] = false;
+                $error['message'] = $this->account_service->error;
+                $this->ajaxReturn($error);
             }
-            $result['code'] = ture;
-            $result['message'] = '操作成功';
-            $this->ajaxReturn($result);
+      
+            $success['code'] = ture;
+            $success['message'] = '登录成功';
+            $this->ajaxReturn($success);
         }else{
             $this->display();
         }
@@ -48,18 +49,12 @@ class IndexController extends Controller {
         $Verify->entry();
     }
     /**
-     * 首页
+     * 退出
+     * 
      */
-    public function home(){
-        if(!empty($_SESSION['account'])){
-            $this->redirect('/index/home');
-        }else{
-            $this->display('login');
-        }
-    }
-    // 检测输入的验证码是否正确，$code为用户输入的验证码字符串
-    public function check_verify($code){
-        $verify = new \Think\Verify();
-        return $verify->check($code);
+    public function logout() {
+        session('account',null);
+        session('name',null);
+        $this->redirect('login');
     }
 }

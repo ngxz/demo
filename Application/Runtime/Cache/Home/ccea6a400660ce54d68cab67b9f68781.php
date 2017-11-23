@@ -43,10 +43,9 @@
 				alert('请输入密码');
 			}
 			$.post(url,data,function(ref){
-				console.log(ref);
 				alert(ref.message);
 				if(ref.code){
-					window.location.href = "<?php echo U('Home/index/home')?>";
+					window.location.href = "<?php echo U('Home/index/index')?>";
 				}
 			},'json');
 		});
