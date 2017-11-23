@@ -1,0 +1,32 @@
+<?php if (!defined('THINK_PATH')) exit();?><!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>统计</title>
+		<link rel="stylesheet" href="//g.alicdn.com/sui/sui3/0.0.18/css/sui.min.css">
+		<style type="text/css">
+			.content{margin: 0 15px;width: 98%;}
+		</style>
+	</head>
+	<body>
+			<ol class="breadcrumb">
+			  <li><a href="#">首页</a></li>
+			  <li><a href="#">订单</a></li>
+			  <li class="active">统计</li>
+			</ol>
+		<div class="content">
+			<div class="alert alert-success" role="alert">
+				您有一笔新的订单到款！
+			</div>
+			
+			当前进度
+			<div class="progress">
+			  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+			    <span class="sr-only">60% 完成</span>
+			  </div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="//g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="//g.alicdn.com/sui/sui3/0.0.18/js/sui.min.js"></script>
+</html>
