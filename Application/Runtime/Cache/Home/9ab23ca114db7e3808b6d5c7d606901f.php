@@ -6,7 +6,6 @@
 		<title></title>
 		<link rel="stylesheet" href="//g.alicdn.com/sui/sui3/0.0.18/css/sui.min.css">
 		<link rel="stylesheet" type="text/css" href="/demo/Public/static/css/main.css" />
-		
 	</head>
 
 	<body>

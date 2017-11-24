@@ -4,9 +4,15 @@
 .loginform .code{width: 24%;height: 30px;}
 .loginform .account{width: 50%;height: 30px;}
 .loginform .pwd{width: 50%;height: 30px;}
+
+/*搜索表单*/
+.searchform{width:;margin: 0 15px;}
+.searchform input{width: 30%;}
+/*个人信息表单*/
+.userform{width:500px;margin: 50px auto;}
 /*表单修饰*/
 body{}
-form{width: 500px;margin: 0 auto;}
+.form{width: 500px;margin: 0 auto;}
 /*表格宽度*/
 .table{margin: 0 15px;width: 98%;}
 

@@ -28,9 +28,9 @@ class IndexController extends Controller {
                 $error['message'] = $this->account_service->error;
                 $this->ajaxReturn($error);
             }
-      
             $success['code'] = ture;
             $success['message'] = '登录成功';
+            
             $this->ajaxReturn($success);
         }else{
             $this->display();
@@ -53,8 +53,9 @@ class IndexController extends Controller {
      * 
      */
     public function logout() {
-        session('account',null);
-        session('name',null);
-        $this->redirect('login');
+        session('user',null);
+        echo "<script>";
+        echo "window.top.location.href = "."'".U('Index/login')."'";
+        echo "</script>";
     }
 }

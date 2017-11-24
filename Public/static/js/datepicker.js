@@ -1,0 +1,3 @@
+
+$(".startdate").datepicker();
+$(".enddate").datepicker();

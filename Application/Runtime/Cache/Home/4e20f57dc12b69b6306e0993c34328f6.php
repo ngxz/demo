@@ -11,7 +11,6 @@
 	<body>
 			<ol class="breadcrumb">
 			  <li><a href="#">首页</a></li>
-			  <li><a href="#">订单</a></li>
 			  <li class="active">统计</li>
 			</ol>
 		<div class="content">
@@ -25,8 +24,17 @@
 			    <span class="sr-only">60% 完成</span>
 			  </div>
 			</div>
+			<button type="button">测试</button>
 		</div>
 	</body>
 	<script type="text/javascript" src="//g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="//g.alicdn.com/sui/sui3/0.0.18/js/sui.min.js"></script>
+	<script type="text/javascript">
+		$("button[type=button]").bind('click',function(){
+			var url = 'http://192.168.2.104/api/api.php/Dada/SysOrder/OrderLists';
+			$.post(url,function(data){
+				alert(typeof(data));
+			},"json");
+		});
+	</script>
 </html>

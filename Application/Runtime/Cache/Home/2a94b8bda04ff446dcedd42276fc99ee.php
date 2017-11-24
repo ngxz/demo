@@ -48,9 +48,13 @@
 		    	<div class="sui-navbar" style="margin-bottom: 0;">
 				  <div class="navbar-inner"><a href="#" class="sui-brand">SUI</a>
 				    <ul class="sui-nav">
-				      <li class="active"><a href="#">订单管理</a></li>
+				      <li class="active"><a onclick="javascript:openpage('Home/tongji')">首页</a></li>
 				      <li><a href="#">系统设置</a></li>
 				      <li><a href="#">关于我们</a></li>
+				    </ul>
+				    <ul class="sui-nav" style="float: right;">
+				      <li><a onclick="javascript:openpage('User/index')">个人信息</a></li>
+				      <li><a onclick="javascript:openpage('Index/logout')">退出</a></li>
 				    </ul>
 				  </div>
 				</div>
@@ -60,17 +64,12 @@
 		<div class="sui-layout">
 		  <div class="sidebar" style="width: 80px;background-color:#fafafa;border-right: 1px solid #eee;">
 		  	<ul class="sui-nav nav-list">
-			  <li class="nav-header">订单</li>
-			  <li class="active"><a onclick="javascript:openpage('Home/tongji')">统计</a></li>
-			  <li><a onclick="javascript:openpage('Home/actlist')">查看</a></li>
-			  <li><a onclick="javascript:openpage('Home/add')">添加</a></li>
-			  <li class="nav-header">商品</li>
-			  <li><a onclick="javascript:openpage('Shop/shoppinglist')">所有 </a></li>
+			  <li class="nav-header">订单管理</li>
+			  <li><a onclick="javascript:openpage('Home/actlist')">列表</a></li>
+			  <li><a onclick="javascript:openpage('Home/add')">新增</a></li>
+			  <li class="nav-header">商户管理</li>
+			  <li><a onclick="javascript:openpage('Shop/shoppinglist')">列表 </a></li>
 			  <li><a onclick="javascript:openpage('Shop/add')">新增</a></li>
-			  <li class="nav-header">个人</li>
-			  <li><a onclick="javascript:openpage('User/index')">信息</a></li>
-			  <li><a onclick="javascript:openpage('User/zijin')">资金</a></li>
-			  <li><a onclick="javascript:openpage('Index/logout')">退出</a></li>
 			</ul>
 		  </div>
 		  <div class="content" style="margin-left: 0;">

@@ -5,25 +5,35 @@
 		<title>商品列表</title>
 		<link rel="stylesheet" href="//g.alicdn.com/sui/sui3/0.0.18/css/sui.min.css">
 		<link rel="stylesheet" href="/demo/Public/static/css/main.css" />
-		<style type="text/css">
-			.table{margin: 0 15px;width: 98%;}
-			/*分页修饰*/
-			.pages{text-align: center;margin: 10px 0;}
-			.pages a,.pages span {display:inline-block;padding:1px 4px;margin:0 1px;border:1px solid #f0f0f0;}
-			.pages a,.pages li {display:inline-block;text-decoration:none;color:#58A0D3;padding: 4px 9px;border:1px solid #f0f0f0;}
-			.pages a.first,.pages a.prev,.pages a.next,.pages a.end{padding: 4px 9px;margin:0;}
-			.pages a:hover{border-color:#50A8E6;}
-			.pages a.num{padding: 4px 9px;}
-			.pages span.current{padding: 4px 9px;background:#50A8E6;color:#FFF;font-weight:700;border-color:#50A8E6;}
-		</style>
 		
 	</head>
 	<body>
 		<ol class="breadcrumb">
-		  <li><a href="#">首页</a></li>
-		  <li><a href="#">商品</a></li>
-		  <li class="active">商品列表</li>
+		  <li><a href="#">商户管理</a></li>
+		  <li class="active">商户列表</li>
 		</ol>
+		<form class="searchform form-inline">
+		  	<div class="form-group">
+			    <label for="code" class="control-label">商品编号</label>
+			    <input type="text" class="form-control" id="code" name="code" placeholder="商品编号">
+			</div>
+			<div class="form-group">
+			    <label for="name" class="control-label">商品名称</label>
+			    <input type="text" class="form-control" id="name" name="name" placeholder="商品名称" required>
+			</div>
+			<div class="form-group">
+			    <label for="name" class="control-label">商品价格</label>
+			    <input type="text" class="form-control" id="price" name="price" placeholder="商品价格" required>
+			</div>
+			<div class="form-group input-daterange" data-toggle="datepicker" data-date-start-date='2010-01-01' data-date-end-date='2020-12-31'>
+			  	<label for="name" class="control-label">日期范围</label>
+			  	<input type="text" class="form-control input-date" placeholder="开始日期"  value='2017-01-01'/> -
+			  	<input type="text" class="form-control input-date" placeholder="结束日期" value='2017-10-31'/>
+			</div>
+			<div class="form-group">
+				<button type="button" class="sui-btn btn-primary">筛选</button>
+			</div>
+		</form>
 		<table class="table table-bordered">
 		  <thead>
 		    <tr>
@@ -74,12 +84,13 @@
 	</body>
 	<script type="text/javascript" src="//g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="//g.alicdn.com/sui/sui3/0.0.18/js/sui.min.js"></script>
+	<!--<script type="text/javascript" src="/demo/Public/static/js/datepicker.js" ></script>-->
 	<script type="text/javascript">
 		function edit(id){
-			window.location.href = "/demo/Home/Shop/edit/id/"+id;
+			window.location.href = "/demo/Shop/edit/id/"+id;
 		}
 		function del(id){
-			$.post("/demo/Home/Shop/del",{'id':id},function(data){
+			$.post("/demo/Shop/del",{'id':id},function(data){
 				alert(data.msg);
 				if(data.status){
 					window.location.reload();
