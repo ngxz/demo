@@ -17,10 +17,7 @@ body{}
 .table{margin: 0 15px;width: 98%;}
 
 /*分页修饰*/
-.pages{text-align: center;margin: 10px 0;}
-.pages a,.pages span {display:inline-block;padding:1px 4px;margin:0 1px;border:1px solid #f0f0f0;}
-.pages a,.pages li {display:inline-block;text-decoration:none;color:#58A0D3;padding: 4px 9px;border:1px solid #f0f0f0;}
-.pages a.first,.pages a.prev,.pages a.next,.pages a.end{padding: 4px 9px;margin:0;}
-.pages a:hover{border-color:#50A8E6;}
-.pages a.num{padding: 4px 9px;}
-.pages span.current{padding: 4px 9px;background:#50A8E6;color:#FFF;font-weight:700;border-color:#50A8E6;}
+.pagination{text-align: center;margin: 15px auto;}
+.turninput{height: 18px;width: 30px;color: #808080!important;}
+/*订单详情页*/
+.orderdetail{margin: 0 15px;width: 98%;}

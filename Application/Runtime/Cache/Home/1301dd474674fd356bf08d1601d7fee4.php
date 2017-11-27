@@ -63,7 +63,7 @@
 			      <td><?php echo ($orderlist["event"]); ?></td>
 			      <td><?php echo ($orderlist["tips"]); ?></td>
 			      <td>
-			      	<a onclick="orderdetail(<?php echo ($orderlist["id"]); ?>)" class="sui-btn btn-bordered btn-small">详情</a>
+			      	<a href="javascript:void()" onclick="orderdetail(<?php echo ($orderlist["id"]); ?>)" class="sui-btn btn-bordered btn-small">详情</a>
 			      </td>
 			    </tr><?php endforeach; endif; else: echo "" ;endif; ?>
 		  </tbody>

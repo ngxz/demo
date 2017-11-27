@@ -610,9 +610,9 @@ function D($name='',$layer='') {
  * @return Think\Model
  */
 function M($name='', $tablePrefix='',$connection='') {
-    static $_model  = array();
-    if(strpos($name,':')) {
-        list($class,$name)    =  explode(':',$name);
+    static $_model  = array();//静态变量，下次执行，值会保存
+    if(strpos($name,':')) {//如果存在表名
+        list($class,$name)    =  explode(':',$name);//用：分割后赋值给$class和$name
     }else{
         $class      =   'Think\\Model';
     }

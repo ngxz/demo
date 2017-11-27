@@ -48,7 +48,7 @@
 		    	<div class="sui-navbar" style="margin-bottom: 0;">
 				  <div class="navbar-inner"><a href="#" class="sui-brand">SUI</a>
 				    <ul class="sui-nav">
-				      <li class="active"><a onclick="javascript:openpage('Home/tongji')">首页</a></li>
+				      <li class="active"><a onclick="javascript:openpage('Order/tongji')">首页</a></li>
 				      <li><a href="#">系统设置</a></li>
 				      <li><a href="#">关于我们</a></li>
 				    </ul>
@@ -65,15 +65,15 @@
 		  <div class="sidebar" style="width: 80px;background-color:#fafafa;border-right: 1px solid #eee;">
 		  	<ul class="sui-nav nav-list">
 			  <li class="nav-header">订单管理</li>
-			  <li><a onclick="javascript:openpage('Home/actlist')">列表</a></li>
-			  <li><a onclick="javascript:openpage('Home/add')">新增</a></li>
+			  <li><a onclick="javascript:openpage('Order/orderlist')">列表</a></li>
+			  <!--<li><a onclick="javascript:openpage('Home/add')">新增</a></li>-->
 			  <li class="nav-header">商户管理</li>
-			  <li><a onclick="javascript:openpage('Shop/shoppinglist')">列表 </a></li>
-			  <li><a onclick="javascript:openpage('Shop/add')">新增</a></li>
+			  <li><a onclick="javascript:openpage('Merchant/merchantlist')">列表 </a></li>
+			  <!--<li><a onclick="javascript:openpage('Merchant/merchantdetail')">新增</a></li>-->
 			</ul>
 		  </div>
 		  <div class="content" style="margin-left: 0;">
-		  	<iframe src="__ROOT__/Home/tongji" id="iframe" onload="changeFrameHeight()"></iframe>
+		  	<iframe src="__ROOT__/Order/tongji" id="iframe" onload="changeFrameHeight()"></iframe>
 		  </div>
 		</div>
 		

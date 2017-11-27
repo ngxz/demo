@@ -1,8 +1,7 @@
 <?php
 namespace Home\Service;
 
-
-class GetsignService{
+class MerchantService{
     public function __construct(){
         $this->url = 'http://192.168.2.104/api/api.php/';
     }
@@ -23,19 +22,18 @@ class GetsignService{
         if ($params['channel']){
             $data['sqlmap']['channel'] = $params['channel'];
         }
-//         if ($params['startdate']){
-//             $data['sqlmap']['time'] = array('BETWEEN',array(strtotime($params['startdate']),strtotime($params['enddate'])));
-//         }
-//         if ($params['enddate']){
-//             $data['sqlmap']['enddate'] = strtotime($params['enddate']);
-//         }
+        if ($params['startdate']){
+            $data['sqlmap']['startdate'] = strtotime($params['startdate']);
+        }
+        if ($params['enddate']){
+            $data['sqlmap']['enddate'] = strtotime($params['enddate']);
+        }
         
-        var_dump($data['sqlmap']);
-          
+        //var_dump($data);
         $data['timestamp'] = time();
         $data['nonce'] = md5($data['timestamp'].rand(0,1000));
         $app_key = C('app_key');
-        $app_secret = C('app_secret');
+        $app_secret = c('app_secret');
         ksort($data);
         $str = '';
         foreach ($data as $k => $v){
@@ -46,25 +44,25 @@ class GetsignService{
         return $data;
     }
     /**
-     * 获取订单列表
+     * 获取商户列表
      * @return mixed
      */
-    public function orderlist($params){
+    public function merchantlist($params){
         $data = $this->getsign($params);
-//         file_put_contents('1.txt', var_export($data,true));
-//           var_dump($data);
         //订单
-        $url = $this->url."Dada/SysOrder/OrderLists";
+        $url = $this->url."Dada/SysMerchant/MerchantLists";
         //获取内容
         $http = new \Think\Http();
         $result = $http->postRequest($url,$data);
         
         //数据转换中文
-        $old = array('addOrder','reAddOrder','addTip','orderDetail','formalCancel','cancelReasons','appointExist','appointCancel','appointListTransporter','Dada');
-        $new = array('新增订单','重发订单','订单增加小费','订单详情','取消订单','订单取消原因','追加订单','取消追加订单','查询追加配送员','达达');
+        $old = array('cityList','addMerchant','addShop','updateShop','shopDetail','Dada');
+        $new = array('获取城市信息','注册商户','新增门店','编辑门店','门店详情','达达');
         $result = str_replace($old, $new, $result);
         
         $result = json_decode($result,true);
+        
+        //var_dump($result);
         
         return $result;
     }
@@ -72,11 +70,10 @@ class GetsignService{
      * 获取单条订单详情
      * @param unknown $id
      */
-    public function orderdetail($id){
+    public function merchantdetail($id){
         $data = $this->getsign($id);
-        
-        
-        $url = $this->url."Dada/SysOrder/OrderDetail";
+    
+        $url = $this->url."Dada/SysMerchant/MerchantDetail";
         //获取内容
         $http = new \Think\Http();
         $result = $http->postRequest($url,$data);
@@ -86,10 +83,10 @@ class GetsignService{
     /**
      * 获取订单总数
      */
-    Public function ordercount($params){
+    Public function merchantcount($params){
         $data = $this->getsign($params);
-//         file_put_contents('2.txt', var_export($data,true));
-        $url = $this->url."Dada/SysOrder/OrderCount";
+        //         file_put_contents('2.txt', var_export($data,true));
+        $url = $this->url."Dada/SysMerchant/MerchantCount";
         //获取内容
         $http = new \Think\Http();
         $result = $http->postRequest($url,$data);
