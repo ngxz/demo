@@ -1,1 +1,0 @@
-a:8:{i:0;s:2:"id";i:1;s:7:"account";i:2;s:4:"name";i:3;s:3:"pwd";i:4;s:5:"grade";i:5;s:10:"last_login";s:3:"_pk";s:2:"id";s:5:"_type";a:6:{s:2:"id";s:7:"int(11)";s:7:"account";s:11:"varchar(11)";s:4:"name";s:12:"varchar(255)";s:3:"pwd";s:11:"varchar(32)";s:5:"grade";s:12:"varchar(255)";s:10:"last_login";s:7:"int(11)";}}

@@ -1,5 +1,0 @@
-array (
-  'nonce' => 'bba6282fe8530c1be303097691e43f72',
-  'timestamp' => 1511770665,
-  'sign' => '647ded7b6e248a3cdb62e1ec6b709001',
-)
