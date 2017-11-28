@@ -6,7 +6,7 @@
 .loginform .pwd{width: 50%;height: 30px;}
 
 /*搜索表单*/
-.searchform{width:;margin: 0 15px;}
+.searchform{width:;margin: 5px 15px;}
 .searchform input{width: 30%;}
 /*个人信息表单*/
 .userform{width:500px;margin: 50px auto;}

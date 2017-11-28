@@ -23,13 +23,9 @@ class MerchantService{
             $data['sqlmap']['channel'] = $params['channel'];
         }
         if ($params['startdate']){
-            $data['sqlmap']['startdate'] = strtotime($params['startdate']);
-        }
-        if ($params['enddate']){
-            $data['sqlmap']['enddate'] = strtotime($params['enddate']);
+            $data['sqlmap']['time'] = array(array('EGT',strtotime($params['startdate'])),array('ELT',strtotime($params['enddate'])));
         }
         
-        //var_dump($data);
         $data['timestamp'] = time();
         $data['nonce'] = md5($data['timestamp'].rand(0,1000));
         $app_key = C('app_key');
@@ -39,7 +35,6 @@ class MerchantService{
         foreach ($data as $k => $v){
             $str .= $k.$v;
         }
-        //
         $data['sign'] = md5($app_key.$str.$app_secret);
         return $data;
     }
@@ -54,16 +49,9 @@ class MerchantService{
         //获取内容
         $http = new \Think\Http();
         $result = $http->postRequest($url,$data);
-        
-        //数据转换中文
-        $old = array('cityList','addMerchant','addShop','updateShop','shopDetail','Dada');
-        $new = array('获取城市信息','注册商户','新增门店','编辑门店','门店详情','达达');
-        $result = str_replace($old, $new, $result);
-        
+        //替换中文
+        $result = $this->replace($result);
         $result = json_decode($result,true);
-        
-        //var_dump($result);
-        
         return $result;
     }
     /**
@@ -77,7 +65,23 @@ class MerchantService{
         //获取内容
         $http = new \Think\Http();
         $result = $http->postRequest($url,$data);
+        
+        //替换中文
+        $result = $this->replace($result);
+        
         $result = json_decode($result,true);
+        return $result;
+    }
+    /**
+     * 替换中文
+     * @param unknown $result
+     * @return mixed
+     */
+    public function replace($result){
+        //数据转换中文
+        $old = array('cityList','addMerchant','addShop','updateShop','shopDetail','Dada');
+        $new = array('获取城市信息','注册商户','新增门店','编辑门店','门店详情','达达');
+        $result = str_replace($old, $new, $result);
         return $result;
     }
     /**

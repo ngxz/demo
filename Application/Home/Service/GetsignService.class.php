@@ -14,7 +14,7 @@ class GetsignService{
         if ($params['page']){
             $data['page'] = $params['page'];
         }
-        if ($params['sn']){
+        if ($params['sn'] != ''){
             $data['sqlmap']['sn'] = $params['sn'];
         }
         if ($params['source_id']){
@@ -23,15 +23,15 @@ class GetsignService{
         if ($params['channel']){
             $data['sqlmap']['channel'] = $params['channel'];
         }
+        if ($params['startdate']){
+            $data['sqlmap']['time'] = array('BETWEEN',array(strtotime($params['startdate']),strtotime($params['enddate'])));
+        }
+
 //         if ($params['startdate']){
-//             $data['sqlmap']['time'] = array('BETWEEN',array(strtotime($params['startdate']),strtotime($params['enddate'])));
-//         }
-//         if ($params['enddate']){
-//             $data['sqlmap']['enddate'] = strtotime($params['enddate']);
+//             $data['sqlmap']['time'] = array(array('EGT',strtotime($params['startdate'])),array('ELT',strtotime($params['enddate'])));
 //         }
         
-        var_dump($data['sqlmap']);
-          
+        
         $data['timestamp'] = time();
         $data['nonce'] = md5($data['timestamp'].rand(0,1000));
         $app_key = C('app_key');
@@ -52,20 +52,18 @@ class GetsignService{
     public function orderlist($params){
         $data = $this->getsign($params);
 //         file_put_contents('1.txt', var_export($data,true));
-//           var_dump($data);
+
         //订单
         $url = $this->url."Dada/SysOrder/OrderLists";
         //获取内容
         $http = new \Think\Http();
         $result = $http->postRequest($url,$data);
         
-        //数据转换中文
-        $old = array('addOrder','reAddOrder','addTip','orderDetail','formalCancel','cancelReasons','appointExist','appointCancel','appointListTransporter','Dada');
-        $new = array('新增订单','重发订单','订单增加小费','订单详情','取消订单','订单取消原因','追加订单','取消追加订单','查询追加配送员','达达');
-        $result = str_replace($old, $new, $result);
+        //转换中文
+        $result = $this->replace($result);
         
         $result = json_decode($result,true);
-        
+//         var_dump($result);
         return $result;
     }
     /**
@@ -80,7 +78,21 @@ class GetsignService{
         //获取内容
         $http = new \Think\Http();
         $result = $http->postRequest($url,$data);
+        //转换中文
+        $result = $this->replace($result);
+        
         $result = json_decode($result,true);
+        return $result;
+    }
+    /**
+     * 转换中文
+     * @param unknown $result
+     */
+    public function replace($result){
+        //数据转换中文
+        $old = array('addOrder','reAddOrder','addTip','orderDetail','formalCancel','cancelReasons','appointExist','appointCancel','appointListTransporter','Dada');
+        $new = array('新增订单','重发订单','订单增加小费','订单详情','取消订单','订单取消原因','追加订单','取消追加订单','查询追加配送员','达达');
+        $result = str_replace($old, $new, $result);
         return $result;
     }
     /**
@@ -88,7 +100,6 @@ class GetsignService{
      */
     Public function ordercount($params){
         $data = $this->getsign($params);
-//         file_put_contents('2.txt', var_export($data,true));
         $url = $this->url."Dada/SysOrder/OrderCount";
         //获取内容
         $http = new \Think\Http();

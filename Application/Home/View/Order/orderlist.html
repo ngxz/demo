@@ -8,7 +8,7 @@
 	</head>
 	<body>
 		<ol class="breadcrumb">
-		  <li><a href="#">订单管理</a></li>
+		  <!--<li><a href="#">订单管理</a></li>-->
 		  <li class="active">订单列表</li>
 		</ol>
 		<form class="searchform form-inline" method="get" action="__ROOT__/index.php/Order/orderlist">
@@ -23,7 +23,7 @@
 			<div class="form-group">
 			    <label for="name" class="control-label">渠道</label>
 			    <select class="form-control" class="channel" name="channel">
-			    	<option value="-1">请选择</option>
+			    	<option value="0">请选择</option>
 			      	<option value="Dada">达达</option>
 			      	<option value="fengniao">蜂鸟</option>
 			    </select>
@@ -93,13 +93,19 @@
 	<script type="text/javascript" src="//g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
 	<script type="text/javascript" src="//g.alicdn.com/sui/sui3/0.0.18/js/sui.min.js"></script>
 	<script type="text/javascript">
-		//回填筛选条件
-	    $("select[name='channel']").val("{$sqlmap.channel}");
-	    
-		//页数
-		var nowpage = {$page};
-		var totalpage = Math.ceil({$ordercount}/10);
-		$(".totalpage").text('总页数：'+totalpage+'页');
+			//回填筛选条件
+			if("{$sqlmap.channel}"){
+				$("select[name='channel']").val("{$sqlmap.channel}");
+			}
+			//页数
+			var nowpage = {$page}?{$page}:1;
+			var totalpage = 0;
+			if('{$ordercount}' !=' '){
+				//$(".pagination").html('没有查询到数据哦');
+				totalpage = Math.ceil({$ordercount}/10);
+			}
+			$(".totalpage").text('总页数：'+totalpage+'页');
+		
 		//详情
 		function orderdetail(id){
 			var url = "__ROOT__/index.php/Order/orderdetail";
@@ -130,6 +136,27 @@
 					$(".turninput").val('');
 					return false;
 				}
+			}
+			//带条件翻页
+			var sn = $("input[name=sn]").val()?$("input[name=sn]").val():'';
+			var source_id = $("input[name=source_id]").val()?$("input[name=source_id]").val():'';
+			var channel = $("input[name=channel]").val()?$("input[name=channel]").val():'';
+			var startdate = $("input[name=startdate]").val()?$("input[name=startdate]").val():'';
+			var enddate = $("input[name=enddate]").val()?$("input[name=enddate]").val():'';
+			if(sn){
+				url = url+'/sn/'+sn;
+			}
+			if(source_id){
+				url = url+'/source-id/'+source_id;
+			}
+			if(channel){
+				url = url+'/channel/'+channel;
+			}
+			if(startdate){
+				url = url+'/stardate/'+startdate;
+			}
+			if(enddate){
+				url = url+'/enddate/'+enddate;
 			}
 			window.location.href = url+'/page/'+page;
 		}
