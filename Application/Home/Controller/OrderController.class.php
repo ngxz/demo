@@ -15,12 +15,15 @@ class OrderController extends PublicController{
         //组装参数
         $result = $this->getsign_service->orderlist(I("get."));
         $ordercount = $this->getsign_service->ordercount(I("get."));
-
+        //渠道和接口列表
+        $orderChannelList = C('orderChannelList');
+        $orderEventList = C('orderEventList');
         //显示
         $this->assign('sqlmap',I("get."));
         $this->assign('page',I('page','1'));
         $this->assign('ordercount',$ordercount['result']);
-        
+        $this->assign('orderChannelList',$orderChannelList);
+        $this->assign('orderEventList',$orderEventList);
         $this->assign('orderlists',$result['result'])->display();
     }
     /**

@@ -18,17 +18,27 @@
 			    <input type="text" class="form-control" class="source_id" name="source_id" placeholder="商户号" value="{$sqlmap.source_id}">
 			</div>
 			<div class="form-group">
-			    <label for="channel" class="control-label">渠道</label>
+			    <label for="name" class="control-label">渠道</label>
 			    <select class="form-control" class="channel" name="channel">
 			    	<option value="0">请选择</option>
-			      	<option value="Dada">达达</option>
-			      	<option value="fengniao">蜂鸟</option>
+			    	<volist name = 'merchantChannelList' id='mcl'>
+			    		<option value="{$key}">{$mcl}</option>
+			    	</volist>
+			    </select>
+			</div>
+			<div class="form-group">
+			    <label for="name" class="control-label">接口</label>
+			    <select class="form-control" class="event" name="event">
+			    	<option value="0">请选择</option>
+			    	<volist name = 'merchantEventList' id='mel'>
+			    		<option value="{$key}">{$mel}</option>
+			    	</volist>
 			    </select>
 			</div>
 			<div class="form-group input-daterange" data-toggle="datepicker" data-date-start-date='2017-01-01' data-date-end-date='2020-12-31'>
 			  	<label for="name" class="control-label">日期范围</label>
 			  	<input type="text" class="form-control input-date" class="startdate" name="startdate" placeholder="开始日期"  value='{$sqlmap.startdate}'/> -
-			  	<input type="text" class="form-control input-date" class="enddate" name="enddate" placeholder="结束日期" value='{$sqlmap.enddate}'/>
+			  	<input type="text" class="form-control input-date" class="enddate" name="enddate" placeholder="结束日期,到当前请留空" value='{$sqlmap.enddate}'/>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-default">筛选</button>
@@ -86,9 +96,11 @@
 	<script type="text/javascript">
 		//回填筛选条件
 		if("{$sqlmap.channel}"){
-			$("select[name='channel']").val("{$sqlmap.channel}");
+			$("select option[value={$sqlmap.channel}]").attr("selected",true);
 		}
-	    
+		if("{$sqlmap.event}"){
+			$("select option[value={$sqlmap.event}]").attr("selected",true);
+		}
 		//页数
 		var nowpage = {$page};
 		var totalpage = Math.ceil({$merchantcount}/10);
@@ -127,7 +139,8 @@
 			}
 			//带条件翻页
 			var source_id = $("input[name=source_id]").val()?$("input[name=source_id]").val():'';
-			var channel = $("input[name=channel]").val()?$("input[name=channel]").val():'';
+			var channel = '{$sqlmap.channel}'?'{$sqlmap.channel}':'';
+			var event = '{$sqlmap.event}'?'{$sqlmap.event}':'';
 			var startdate = $("input[name=startdate]").val()?$("input[name=startdate]").val():'';
 			var enddate = $("input[name=enddate]").val()?$("input[name=enddate]").val():'';
 			if(source_id){
@@ -135,6 +148,9 @@
 			}
 			if(channel){
 				url = url+'/channel/'+channel;
+			}
+			if(event){
+				url = url+'/event/'+event;
 			}
 			if(startdate){
 				url = url+'/stardate/'+startdate;

@@ -23,15 +23,15 @@ class GetsignService{
         if ($params['channel']){
             $data['sqlmap']['channel'] = $params['channel'];
         }
-        if ($params['startdate']){
+        if ($params['event']){
+            $data['sqlmap']['event'] = $params['event'];
+        }
+        if ($params['startdate'] && $params['enddate']){
             $data['sqlmap']['time'] = array('BETWEEN',array(strtotime($params['startdate']),strtotime($params['enddate'])));
         }
-
-//         if ($params['startdate']){
-//             $data['sqlmap']['time'] = array(array('EGT',strtotime($params['startdate'])),array('ELT',strtotime($params['enddate'])));
-//         }
-        
-        
+        if ($params['startdate'] && !$params['enddate']){
+            $data['sqlmap']['time'] = array('BETWEEN',array(strtotime($params['startdate']),time()));
+        }
         $data['timestamp'] = time();
         $data['nonce'] = md5($data['timestamp'].rand(0,1000));
         $app_key = C('app_key');
@@ -51,7 +51,6 @@ class GetsignService{
      */
     public function orderlist($params){
         $data = $this->getsign($params);
-//         file_put_contents('1.txt', var_export($data,true));
 
         //订单
         $url = $this->url."Dada/SysOrder/OrderLists";

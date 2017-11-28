@@ -17,4 +17,34 @@ return array(
     'DB_RW_SEPARATE'        =>  false,       // 数据库读写是否分离 主从式有效
     'DB_MASTER_NUM'         =>  1, // 读写分离后 主服务器数量
     'DB_SLAVE_NO'           =>  '', // 指定从服务器序号
+    
+    
+    /*订单和商户渠道列表*/
+   	'orderChannelList'			=>	array(
+   		'Dada'	=>	'达达',
+   	),
+   	'merchantChannelList'			=>	array(
+   		'Dada'	=>	'达达',
+   	),
+   	/*订单接口列表*/
+   	'orderEventList'			=>	array(
+   		'addOrder' 		=>	'新增订单',
+  		'reAddOrder' 	=>	'重发订单',
+  		'addTip' 		=>	'订单增加小费',
+  		'orderDetail' 	=>	'订单详情查询',
+  		'formalCancel' 	=>	'取消订单',
+  		'cancelReasons' =>	'订单取消原因',
+  		'appointExist' 	=>	'追加订单',
+  		'appointCancel' =>	'取消追加订单',
+  		'appointListTransporter' =>	'查询追加配送员',
+   	),
+  	
+  	/*商户接口列表*/
+  	'merchantEventList'			=>	array(
+   		'cityList'		=>	'获取城市信息',
+	  	'addMerchant'	=>	'注册商户',
+	  	'addShop'		=>	'新增门店',
+	  	'updateShop'	=>	'编辑门店',
+	  	'shopDetail'	=>	'门店详情',
+   	),
 );

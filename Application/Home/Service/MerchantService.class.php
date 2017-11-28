@@ -22,8 +22,14 @@ class MerchantService{
         if ($params['channel']){
             $data['sqlmap']['channel'] = $params['channel'];
         }
-        if ($params['startdate']){
+        if ($params['event']){
+            $data['sqlmap']['event'] = $params['event'];
+        }
+        if ($params['startdate'] && $params['enddate']){
             $data['sqlmap']['time'] = array(array('EGT',strtotime($params['startdate'])),array('ELT',strtotime($params['enddate'])));
+        }
+        if ($params['startdate'] && !$params['enddate']){
+            $data['sqlmap']['time'] = array(array('EGT',strtotime($params['startdate'])),array('ELT',time()));
         }
         
         $data['timestamp'] = time();
@@ -44,11 +50,13 @@ class MerchantService{
      */
     public function merchantlist($params){
         $data = $this->getsign($params);
+//         var_dump($data);
         //订单
         $url = $this->url."Dada/SysMerchant/MerchantLists";
         //获取内容
         $http = new \Think\Http();
         $result = $http->postRequest($url,$data);
+        
         //替换中文
         $result = $this->replace($result);
         $result = json_decode($result,true);
