@@ -2,8 +2,10 @@
 namespace Home\Service;
 
 class MerchantService{
+    public  $error = '';
     public function __construct(){
-        $this->url = 'http://192.168.2.104/api/api.php/';
+        $this->url = C('url');
+        $this->http = new \Think\Http();
     }
     /**
      * 组装参数
@@ -54,8 +56,8 @@ class MerchantService{
         //订单
         $url = $this->url."Dada/SysMerchant/MerchantLists";
         //获取内容
-        $http = new \Think\Http();
-        $result = $http->postRequest($url,$data);
+        
+        $result = $this->http->postRequest($url,$data);
         
         //替换中文
         $result = $this->replace($result);
@@ -63,7 +65,7 @@ class MerchantService{
         return $result;
     }
     /**
-     * 获取单条订单详情
+     * 获取单条商户详情
      * @param unknown $id
      */
     public function merchantdetail($id){
@@ -71,14 +73,84 @@ class MerchantService{
     
         $url = $this->url."Dada/SysMerchant/MerchantDetail";
         //获取内容
-        $http = new \Think\Http();
-        $result = $http->postRequest($url,$data);
+        
+        $result = $this->http->postRequest($url,$data);
         
         //替换中文
         $result = $this->replace($result);
         
         $result = json_decode($result,true);
         return $result;
+    }
+    /**
+     * 新增门店
+     */
+    public function addmerchant($params){
+        $data = array();
+        $data = $this->addmerchantsign($params);
+        if (!$data){
+            return false;
+        }
+        $url = $this->url.'Dada/Merchant/addMerchant';
+        $result = json_decode($this->http->postRequest($url,$data),true);
+        //var_dump($result);
+        //根据返回状态判断
+        if ($result['status'] == 'fail'){
+            $this->error = $result['msg'];
+            return false;
+        }
+        return true;
+    }
+    /**
+     * 新增门店验证参数
+     * @param unknown $params
+     */
+    private function addmerchantsign($params){
+        if (!$params['mobile']){
+            $this->error = '手机号码不能为空';
+            return false;
+        }
+        if(!$params['city_name']){
+            $this->error = '城市名不能为空';
+            return false;
+        }
+        if(!$params['enterprise_name']){
+            $this->error = '企业名称不能为空';
+            return false;
+        }
+        if(!$params['enterprise_address']){
+            $this->error = '企业地址不能为空';
+            return false;
+        }
+        if(!$params['contact_phone']){
+            $this->error = '联系人电话不能为空';
+            return false;
+        }
+        if(!$params['email']){
+            $this->error = '邮箱不能为空';
+            return false;
+        }
+        $data['body'] = array();
+        $data['source_id'] = '73753';
+        $data['body']['mobile'] = $params['mobile'];
+        $data['body']['city_name'] = $params['city_name'];
+        $data['body']['enterprise_name'] = $params['enterprise_name'];
+        $data['body']['enterprise_address'] = $params['enterprise_address'];
+        $data['body']['contact_phone'] = $params['contact_phone'];
+        $data['body']['email'] = $params['email'];
+        
+        //验证参数
+        $data['timestamp'] = time();
+        $data['nonce'] = md5($data['timestamp'].rand(0,1000));
+        $app_key = C('app_key');
+        $app_secret = C('app_secret');
+        ksort($data);
+        $str = '';
+        foreach ($data as $k => $v){
+            $str .= $k.$v;
+        }
+        $data['sign'] = md5($app_key.$str.$app_secret);
+        return $data;
     }
     /**
      * 替换中文
@@ -97,13 +169,16 @@ class MerchantService{
      */
     Public function merchantcount($params){
         $data = $this->getsign($params);
-        //         file_put_contents('2.txt', var_export($data,true));
+        
         $url = $this->url."Dada/SysMerchant/MerchantCount";
         //获取内容
         $http = new \Think\Http();
         $result = $http->postRequest($url,$data);
         $result = json_decode($result,true);
         return $result;
+    }
+    public function getError(){
+        return $this->error;
     }
 }
 

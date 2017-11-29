@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>新增订单</title>
+		<link rel="stylesheet" href="//g.alicdn.com/sui/sui3/0.0.18/css/sui.min.css">
+		<link rel="stylesheet" href="__PUBLIC__/static/css/main.css" />
+	</head>
+	<body>
+		<ol class="breadcrumb">
+		  	<li class="active">新增订单</li>
+		</ol>
+		
+		<form class="form" data-toggle='validate' method="post" enctype="multipart/form-data">
+		  	<div class="form-group">
+			    <label for="code" class="control-label">订单号</label>
+			    <input type="text" class="form-control" class="order_id" name="order_id" placeholder="订单号（必填）">
+			</div>
+			<div class="form-group">
+			    <label for="name" class="control-label">商户号</label>
+			    <input type="text" class="form-control" class="source_id" name="source_id" placeholder="商户号（必填）">
+			</div>
+			<div class="form-group">
+			    <label for="name" class="control-label">门店编号</label>
+			    <input type="text" class="form-control" class="shop_no" name="shop_no" placeholder="门店编号(必填)">
+			</div>
+			<div class="form-group">
+			    <label for="name" class="control-label">第三方订单ID</label>
+			    <input type="text" class="form-control" class="origin_id" name="origin_id" placeholder="第三方订单ID(必填)">
+			</div>
+			<div class="form-group">
+			    <label for="name" class="control-label">订单所在城市code</label>
+			    <input type="text" class="form-control" class="city_code" name="city_code" placeholder="订单所在城市code(必填)">
+			</div>
+			<div class="form-group">
+			    <label for="name" class="control-label">订单金额</label>
+			    <input type="text" class="form-control" class="cargo_price" name="cargo_price" placeholder="订单金额（必填）">
+			</div>
+			<div class="form-group">
+			    <label for="name" class="control-label">小费</label>
+			    <input type="text" class="form-control" class="tips" name="tips" placeholder="小费（必填）">
+			</div>
+			<div class="control-group" style="text-align: center;margin-top: 30px;">
+				<div class="controls">
+					<input type="button" class="btn btn-primary" value="添加">
+					<button type="reset" class="btn">重置</button>
+				</div>
+			</div>
+		</form>
+	</body>
+	<script type="text/javascript" src="//g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
+	<script type="text/javascript" src="//g.alicdn.com/sui/sui3/0.0.18/js/sui.min.js"></script>
+	<script type="text/javascript">
+		$("input[type=button]").bind('click',function(){
+			var data = {};
+			data['order_id'] = $("input[name=order_id]").val();
+			data['source_id'] = $("input[name=source_id]").val();
+			data['cargo_price'] = $("input[name=cargo_price]").val();
+			data['shop_no'] = $("input[name=shop_no]").val();
+			data['origin_id'] = $("input[name=origin_id]").val();
+			data['city_code'] = $("input[name=city_code]").val();
+			data['tips'] = $("input[name=tips]").val();
+			if(!data['order_id']){
+				alert('订单号必填哦！');
+				return false;
+			}
+			if(!data['source_id']){
+				alert('商户号必填哦！');
+				return false;
+			}
+			if(!data['shop_no']){
+				alert('门店编号必填哦！');
+				return false;
+			}
+			if(!data['origin_id']){
+				alert('第三方订单ID必填哦！');
+				return false;
+			}
+			if(!data['city_code']){
+				alert('订单所在城市必填哦！');
+				return false;
+			}
+			if(!data['cargo_price']){
+				alert('订单金额必填哦！');
+				return false;
+			}
+			if(!data['tips']){
+				alert('小费必填哦！');
+				return false;
+			}
+			var url = "__ROOT__/index.php/Order/addorder";
+			$.post(url,data,function(ref){
+				alert(ref.message);
+//				if(ref.status){
+//					window.loaction.href = ref.url;
+//				}
+				return false;
+			},'json');
+		});
+	</script>
+</html>

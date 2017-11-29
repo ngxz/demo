@@ -5,7 +5,7 @@ use Home\Controller\PublicController;
 class OrderController extends PublicController{
     public function _initialize(){
         parent::_initialize();
-        $this->getsign_service = D('Getsign','Service');
+        $this->order_service = D('Order','Service');
     }
 
     /**
@@ -13,24 +13,20 @@ class OrderController extends PublicController{
      */
     public function orderlist(){
         //组装参数
-        $result = $this->getsign_service->orderlist(I("get."));
-        $ordercount = $this->getsign_service->ordercount(I("get."));
+        $result = $this->order_service->orderlist(I("get."));
+        $ordercount = $this->order_service->ordercount(I("get."));
         //渠道和接口列表
-        $orderChannelList = C('orderChannelList');
-        $orderEventList = C('orderEventList');
+        $config['orderChannelList']= C('orderChannelList');
+        $config['orderEventList']= C('orderEventList');
         //显示
-        $this->assign('sqlmap',I("get."));
-        $this->assign('page',I('page','1'));
-        $this->assign('ordercount',$ordercount['result']);
-        $this->assign('orderChannelList',$orderChannelList);
-        $this->assign('orderEventList',$orderEventList);
-        $this->assign('orderlists',$result['result'])->display();
+        $this->assign('page',I('page','1'))->assign('ordercount',$ordercount['result']);
+        $this->assign('config', $config)->assign('orderlists',$result['result'])->display();
     }
     /**
      * 获取单个订单详情
      */
     public function orderdetail($id){
-        $result = $this->getsign_service->orderdetail($id);
+        $result = $this->order_service->orderdetail($id);
         
 //         var_dump($result);die();
         $this->assign('result',$result['result'])->display();
@@ -42,13 +38,24 @@ class OrderController extends PublicController{
         $this->display();
     }
     /**
-     * 添加
+     * 添加订单
      */
-    public function add(){
+    public function addorder(){
         if (IS_POST){
-            $data['name'] = I('name','');
+            $result = $this->order_service->addorder(I('post.'));
+            $data = array();
+            if (!$result){
+                $data['status'] = 0;
+                $data['message'] = '操作失败：'.$this->order_service->getError();
+            }else{
+                $data['status'] = 1;
+                $data['message'] = '新增成功';
+                $data['url'] = '';
+            }
+            $this->ajaxReturn($data);
+        }else {
+            $this->display();
         }
-        $this->display();
     }
     
 }

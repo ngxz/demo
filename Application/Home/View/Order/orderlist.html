@@ -1,8 +1,11 @@
+<?php 
+	$sqlmap =  I('get.');
+?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>订单列表</title>
 		<link rel="stylesheet" href="//g.alicdn.com/sui/sui3/0.0.18/css/sui.min.css">
 		<link rel="stylesheet" href="__PUBLIC__/static/css/main.css" />
 	</head>
@@ -23,8 +26,8 @@
 			<div class="form-group">
 			    <label for="name" class="control-label">渠道</label>
 			    <select class="form-control" class="channel" name="channel">
-			    	<option value="0">请选择</option>
-			    	<volist name = 'orderChannelList' id='ocl'>
+			    	<option value="0">全部</option>
+			    	<volist name = 'config[orderChannelList]' id='ocl'>
 			    		<option value="{$key}">{$ocl}</option>
 			    	</volist>
 			    </select>
@@ -32,8 +35,8 @@
 			<div class="form-group">
 			    <label for="name" class="control-label">接口</label>
 			    <select class="form-control" class="event" name="event">
-			    	<option value="0">请选择</option>
-			    	<volist name = 'orderEventList' id='oel'>
+			    	<option value="0">全部</option>
+			    	<volist name = 'config[orderEventList]' id='oel'>
 			    		<option value="{$key}">{$oel}</option>
 			    	</volist>
 			    </select>
@@ -68,7 +71,7 @@
 		  		<tr>
 			      <td>{$orderlist.sn}</td>
 			      <td>{$orderlist.source_id}</td>
-			      <td>{$orderlist.time|date='Y-m-d',###}</td>
+			      <td>{$orderlist.time|date='Y-m-d H:i:s',###}</td>
 			      <td>{$orderlist.money}</td>
 			      <td>{$orderlist.msg|msubstr=0,60}</td>
 			      <td>{$orderlist.client_ip}</td>
@@ -94,7 +97,7 @@
 		      <li class="next">
 		        <a href="javascript:void(0)" onclick="javascript:turnpage(this,0)">下一页</a>
 		      </li>
-		      <li><a>到：<input class="turninput" type="text"/> 页</a><a onclick="javascript:turnpage(this,1)">跳转</a></li>
+		      <li><a>到：<input class="turninput" type="text"/> 页</a><a href="javascript:void(0)" onclick="javascript:turnpage(this,1)">跳转</a></li>
 		      <li><a class="totalpage"></a></li>
 		    </ul>
 		  </div>
@@ -104,12 +107,15 @@
 	<script type="text/javascript" src="//g.alicdn.com/sui/sui3/0.0.18/js/sui.min.js"></script>
 	<script type="text/javascript">
 			//回填筛选条件
-			if("{$sqlmap.channel}"){
-				$("select option[value={$sqlmap.channel}]").attr("selected",true);
-			}
-			if("{$sqlmap.event}"){
-				$("select option[value={$sqlmap.event}]").attr("selected",true);
-			}
+			$(function(){
+				if("{$sqlmap.channel}"){
+					$("select:first [value={$sqlmap.channel}]").attr("selected",true);
+				}
+				var event = "{$sqlmap.event}";
+				if(event){
+					$("select:last [value="+ event +"]").attr("selected",true);
+				}
+			});
 			//页数
 			var nowpage = {$page}?{$page}:1;
 			var totalpage = 0;
