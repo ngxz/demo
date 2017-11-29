@@ -52,13 +52,10 @@ class MerchantService{
      */
     public function merchantlist($params){
         $data = $this->getsign($params);
-//         var_dump($data);
         //订单
         $url = $this->url."Dada/SysMerchant/MerchantLists";
         //获取内容
-        
         $result = $this->http->postRequest($url,$data);
-        
         //替换中文
         $result = $this->replace($result);
         $result = json_decode($result,true);
@@ -70,15 +67,11 @@ class MerchantService{
      */
     public function merchantdetail($id){
         $data = $this->getsign($id);
-    
         $url = $this->url."Dada/SysMerchant/MerchantDetail";
         //获取内容
-        
         $result = $this->http->postRequest($url,$data);
-        
         //替换中文
         $result = $this->replace($result);
-        
         $result = json_decode($result,true);
         return $result;
     }
@@ -138,7 +131,6 @@ class MerchantService{
         $data['body']['enterprise_address'] = $params['enterprise_address'];
         $data['body']['contact_phone'] = $params['contact_phone'];
         $data['body']['email'] = $params['email'];
-        
         //验证参数
         $data['timestamp'] = time();
         $data['nonce'] = md5($data['timestamp'].rand(0,1000));
@@ -169,11 +161,9 @@ class MerchantService{
      */
     Public function merchantcount($params){
         $data = $this->getsign($params);
-        
         $url = $this->url."Dada/SysMerchant/MerchantCount";
         //获取内容
-        $http = new \Think\Http();
-        $result = $http->postRequest($url,$data);
+        $result = $this->http->postRequest($url,$data);
         $result = json_decode($result,true);
         return $result;
     }

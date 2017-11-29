@@ -1,7 +1,6 @@
 <?php
 namespace Home\Service;
 
-
 class OrderService{
     public $error = '';
     public function __construct(){
@@ -54,18 +53,13 @@ class OrderService{
      */
     public function orderlist($params){
         $data = $this->getsign($params);
-
         //订单
         $url = $this->url."Dada/SysOrder/OrderLists";
         //获取内容
-        $http = new \Think\Http();
-        $result = $http->postRequest($url,$data);
-        
+        $result = $this->http->postRequest($url,$data);
         //转换中文
         $result = $this->replace($result);
-        
         $result = json_decode($result,true);
-//         var_dump($result);
         return $result;
     }
     /**
@@ -74,15 +68,11 @@ class OrderService{
      */
     public function orderdetail($id){
         $data = $this->getsign($id);
-        
-        
         $url = $this->url."Dada/SysOrder/OrderDetail";
         //获取内容
-        $http = new \Think\Http();
-        $result = $http->postRequest($url,$data);
+        $result = $this->http->postRequest($url,$data);
         //转换中文
         $result = $this->replace($result);
-        
         $result = json_decode($result,true);
         return $result;
     }
@@ -167,8 +157,7 @@ class OrderService{
         $data = $this->getsign($params);
         $url = $this->url."Dada/SysOrder/OrderCount";
         //获取内容
-        $http = new \Think\Http();
-        $result = $http->postRequest($url,$data);
+        $result = $this->http->postRequest($url,$data);
         $result = json_decode($result,true);
         return $result;
     }

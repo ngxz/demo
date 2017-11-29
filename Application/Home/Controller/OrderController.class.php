@@ -7,7 +7,6 @@ class OrderController extends PublicController{
         parent::_initialize();
         $this->order_service = D('Order','Service');
     }
-
     /**
      * 获取列表
      */
@@ -27,8 +26,6 @@ class OrderController extends PublicController{
      */
     public function orderdetail($id){
         $result = $this->order_service->orderdetail($id);
-        
-//         var_dump($result);die();
         $this->assign('result',$result['result'])->display();
     }
     /**

@@ -10,13 +10,12 @@ class MerchantController extends PublicController{
      * 商户列表
      */
     public function merchantlist(){
-        
         $result = $this->merchant_service->merchantlist(I("get."));
         $merchantcount = $this->merchant_service->merchantcount(I("get."));
         //渠道和接口列表
         $config['merchantChannelList'] = C('merchantChannelList');
         $config['merchantEventList'] = C('merchantEventList');
-        
+        //显示
         $this->assign('page',I('page','1'))->assign('config',$config);
         $this->assign('merchantcount',$merchantcount['result']);
         $this->assign('merchantlists',$result['result'])->display();
@@ -27,7 +26,6 @@ class MerchantController extends PublicController{
      */
     public function merchantdetail($id){
         $result = $this->merchant_service->merchantdetail($id);
-        
         $this->assign('result',$result['result'])->display();
     }
     /**
