@@ -12,6 +12,9 @@ class MerchantService{
      */
     Public function getsign($params){
         //筛选参数
+        if ($params['id']){
+            $data['id'] = $params['id'];
+        }
         if ($params['page']){
             $data['page'] = $params['page'];
         }
@@ -65,8 +68,8 @@ class MerchantService{
      * 获取单条商户详情
      * @param unknown $id
      */
-    public function merchantdetail($id){
-        $data = $this->getsign($id);
+    public function merchantdetail($params){
+        $data = $this->getsign($params);
         $url = $this->url."Dada/SysMerchant/MerchantDetail";
         //获取内容
         $result = $this->http->postRequest($url,$data);

@@ -12,6 +12,9 @@ class OrderService{
      */
     Public function getsign($params){
         //筛选参数
+        if ($params['id']){
+            $data['id'] = $params['id'];
+        }
         if ($params['page']){
             $data['page'] = $params['page'];
         }
@@ -52,6 +55,7 @@ class OrderService{
      * @return mixed
      */
     public function orderlist($params){
+        $data = array();
         $data = $this->getsign($params);
         //订单
         $url = $this->url."Dada/SysOrder/OrderLists";
@@ -66,8 +70,8 @@ class OrderService{
      * 获取单条订单详情
      * @param unknown $id
      */
-    public function orderdetail($id){
-        $data = $this->getsign($id);
+    public function orderdetail($params){
+        $data = $this->getsign($params);
         $url = $this->url."Dada/SysOrder/OrderDetail";
         //获取内容
         $result = $this->http->postRequest($url,$data);

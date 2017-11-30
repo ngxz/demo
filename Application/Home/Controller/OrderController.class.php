@@ -24,8 +24,8 @@ class OrderController extends PublicController{
     /**
      * 获取单个订单详情
      */
-    public function orderdetail($id){
-        $result = $this->order_service->orderdetail($id);
+    public function orderdetail(){
+        $result = $this->order_service->orderdetail(I("get."));
         $this->assign('result',$result['result'])->display();
     }
     /**

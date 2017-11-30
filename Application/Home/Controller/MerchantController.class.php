@@ -24,8 +24,8 @@ class MerchantController extends PublicController{
      * 商户详情
      * @param unknown $id
      */
-    public function merchantdetail($id){
-        $result = $this->merchant_service->merchantdetail($id);
+    public function merchantdetail(){
+        $result = $this->merchant_service->merchantdetail(I("get."));
         $this->assign('result',$result['result'])->display();
     }
     /**
