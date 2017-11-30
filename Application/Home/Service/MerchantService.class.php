@@ -89,7 +89,6 @@ class MerchantService{
         }
         $url = $this->url.'Dada/Merchant/addMerchant';
         $result = json_decode($this->http->postRequest($url,$data),true);
-        //var_dump($result);
         //根据返回状态判断
         if ($result['status'] == 'fail'){
             $this->error = $result['msg'];
